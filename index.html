@@ -384,30 +384,33 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // YOUR GOOGLE WEB APP URL IS NOW HARDCODED BELOW
+            // YOUR GOOGLE WEB APP URL
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec';
 
             submitBtn.disabled = true;
             submitBtn.innerText = "Dispatching Messenger...";
 
             try {
+                // Using URLSearchParams ensures data is sent in a format Google Script can easily read (x-www-form-urlencoded)
                 const formData = new FormData(form);
-                
-                // Using 'no-cors' mode can sometimes be necessary if Google Script throws CORS errors,
-                // but since the script returns a valid response, the default should work.
-                const response = await fetch(SCRIPT_URL, {
+                const params = new URLSearchParams(formData);
+
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    body: formData
+                    body: params.toString(),
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
                 });
 
-                // Google Apps Script doesn't always return standard CORS headers on POST. 
-                // If it successfully sends, we show the success overlay regardless of status code 
-                // as long as the fetch didn't throw an error.
+                // In 'no-cors' mode, we don't get a response object we can read,
+                // but if it didn't crash, the browser sent the quest.
                 overlay.style.display = 'flex';
                 
             } catch (err) {
                 console.error(err);
-                alert("The messenger was intercepted! (Error submitting form). Please verify your script is deployed to 'Anyone'.");
+                alert("The messenger was intercepted! Please check your connection or script permissions.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Submit Order to the Scrolls";
             }
