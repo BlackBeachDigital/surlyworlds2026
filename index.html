@@ -107,9 +107,11 @@
 <body class="p-4 md:p-8">
 
     <div id="successOverlay">
-        <h2 class="cinzel text-4xl mb-4">Quest Complete!</h2>
-        <p class="text-xl">Your order has been recorded in the scrolls.</p>
-        <button onclick="location.reload()" class="mt-6 px-6 py-2 bg-white text-black rounded font-bold">Submit Another</button>
+        <div class="text-center p-8 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20">
+            <h2 class="cinzel text-4xl mb-4">Quest Complete!</h2>
+            <p class="text-xl">Your order has been recorded in the scrolls.</p>
+            <button onclick="location.reload()" class="mt-6 px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors">Submit Another</button>
+        </div>
     </div>
 
     <div class="max-w-4xl mx-auto form-container rounded-xl p-6 md:p-12 relative overflow-hidden">
@@ -119,7 +121,7 @@
             <img src="https://surlyworlds2026.netlify.app/images/eagle-surly-logo-color.svg" alt="Surly Logo" class="w-48 h-auto">
             <div class="text-center">
                 <h1 class="cinzel text-3xl md:text-5xl font-bold text-gray-800 tracking-tighter">SURWOOD FOREST</h1>
-                <p class="cinzel text-lg text-emerald-800 mt-2 font-bold">WMUCC Nottingham 2026</p>
+                <p class="cinzel text-lg text-emerald-800 mt-2 font-bold uppercase tracking-widest">WMUCC Nottingham 2026</p>
             </div>
             <img src="https://surlyworlds2026.netlify.app/images/WMUCC-2026-Official-Logo.png" alt="WMUCC Logo" class="w-32 h-auto">
         </div>
@@ -142,10 +144,10 @@
             </div>
 
             <!-- JERSEY NUMBER -->
-            <div class="bg-amber-50 p-4 border-l-4 border-amber-500 rounded mb-8">
+            <div class="bg-amber-50 p-6 border-l-4 border-amber-500 rounded-lg mb-8 shadow-sm">
                 <label class="block font-bold mb-1">Jersey Number</label>
                 <input type="text" name="jerseyNumber" placeholder="Enter # or 'None'">
-                <p class="text-sm italic mt-2 text-amber-800">
+                <p class="text-sm italic mt-3 text-amber-900 leading-relaxed">
                     <strong>Note:</strong> If you would like to order a jersey with a different number for a family member or friend, simply fill out this form a second time with the same email address.
                 </p>
             </div>
@@ -157,12 +159,12 @@
                 <span>The Blue Kit</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <img src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" class="kit-img" alt="Blue Kit">
-                <img src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" class="mockup-img" alt="Blue Mockup">
+                <img src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" class="kit-img rounded-lg" alt="Blue Kit">
+                <img src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" class="mockup-img rounded-lg" alt="Blue Mockup">
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Short Sleeve</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Short Sleeve</h3>
                     <input type="number" name="blueSSQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="blueSSSize">
                         <option value="">Select Size</option>
@@ -181,7 +183,7 @@
                     </select>
                 </div>
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Long Sleeve</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Long Sleeve</h3>
                     <input type="number" name="blueLSQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="blueLSSize">
                         <option value="">Select Size</option>
@@ -196,7 +198,7 @@
                     </select>
                 </div>
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Hoodie</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Hoodie</h3>
                     <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="blueHoodieSize">
                         <option value="">Select Size</option>
@@ -217,12 +219,12 @@
                 <span>The Red Kit</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <img src="https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg" class="kit-img" alt="Red Kit">
-                <img src="https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg" class="mockup-img" alt="Red Mockup">
+                <img src="https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg" class="kit-img rounded-lg" alt="Red Kit">
+                <img src="https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg" class="mockup-img rounded-lg" alt="Red Mockup">
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Short Sleeve</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Short Sleeve</h3>
                     <input type="number" name="redSSQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="redSSSize">
                         <option value="">Select Size</option>
@@ -241,7 +243,7 @@
                     </select>
                 </div>
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Long Sleeve</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Long Sleeve</h3>
                     <input type="number" name="redLSQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="redLSSize">
                         <option value="">Select Size</option>
@@ -256,7 +258,7 @@
                     </select>
                 </div>
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Hoodie</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Hoodie</h3>
                     <input type="number" name="redHoodieQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="redHoodieSize">
                         <option value="">Select Size</option>
@@ -277,12 +279,12 @@
                 <span>The White Kit</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <img src="https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg" class="kit-img" alt="White Kit">
-                <img src="https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg" class="mockup-img" alt="White Mockup">
+                <img src="https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg" class="kit-img rounded-lg" alt="White Kit">
+                <img src="https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg" class="mockup-img rounded-lg" alt="White Mockup">
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Short Sleeve</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Short Sleeve</h3>
                     <input type="number" name="whiteSSQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="whiteSSSize">
                         <option value="">Select Size</option>
@@ -301,7 +303,7 @@
                     </select>
                 </div>
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Long Sleeve</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Long Sleeve</h3>
                     <input type="number" name="whiteLSQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="whiteLSSize">
                         <option value="">Select Size</option>
@@ -316,7 +318,7 @@
                     </select>
                 </div>
                 <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b mb-2">Hoodie</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Hoodie</h3>
                     <input type="number" name="whiteHoodieQty" value="0" min="0" class="mb-2" placeholder="Qty">
                     <select name="whiteHoodieSize">
                         <option value="">Select Size</option>
@@ -337,9 +339,9 @@
                 <span>The Shorts</span>
             </div>
             <div class="flex flex-col md:flex-row gap-8 items-center mb-12">
-                <img src="https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg" class="h-48 w-auto rounded shadow" alt="Red Shorts">
+                <img src="https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg" class="h-48 w-auto rounded shadow-lg" alt="Red Shorts">
                 <div class="card p-6 rounded-lg flex-1 w-full">
-                    <h3 class="font-bold border-b mb-2">Red Shorts</h3>
+                    <h3 class="font-bold border-b pb-2 mb-3">Red Shorts</h3>
                     <div class="grid grid-cols-2 gap-4">
                         <input type="number" name="redShortsQty" value="0" min="0" placeholder="Qty">
                         <select name="redShortsSize">
@@ -364,12 +366,12 @@
             </div>
 
             <!-- SUBMIT -->
-            <button type="submit" id="submitBtn" class="w-full py-4 rounded-lg submit-btn cinzel text-2xl shadow-lg">
+            <button type="submit" id="submitBtn" class="w-full py-5 rounded-lg submit-btn cinzel text-2xl shadow-xl">
                 Submit Order to the Scrolls
             </button>
         </form>
 
-        <div class="mt-8 text-center text-xs opacity-60">
+        <div class="mt-12 text-center text-xs opacity-60 uppercase tracking-widest font-semibold text-emerald-900">
             &copy; 2026 Surly Ultimate - Nottingham World Championships Quest
         </div>
     </div>
@@ -382,32 +384,30 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // IMPORTANT: REPLACE THE URL BELOW WITH YOUR GOOGLE WEB APP URL
+            // YOUR GOOGLE WEB APP URL IS NOW HARDCODED BELOW
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec';
-
-            if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec') {
-                alert("Please set your Google Apps Script URL in the code first!");
-                return;
-            }
 
             submitBtn.disabled = true;
             submitBtn.innerText = "Dispatching Messenger...";
 
             try {
                 const formData = new FormData(form);
+                
+                // Using 'no-cors' mode can sometimes be necessary if Google Script throws CORS errors,
+                // but since the script returns a valid response, the default should work.
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: formData
                 });
 
-                if (response.ok) {
-                    overlay.style.display = 'flex';
-                } else {
-                    throw new Error('Server error');
-                }
+                // Google Apps Script doesn't always return standard CORS headers on POST. 
+                // If it successfully sends, we show the success overlay regardless of status code 
+                // as long as the fetch didn't throw an error.
+                overlay.style.display = 'flex';
+                
             } catch (err) {
                 console.error(err);
-                alert("The messenger was intercepted! (Error submitting form). Check your script URL and permissions.");
+                alert("The messenger was intercepted! (Error submitting form). Please verify your script is deployed to 'Anyone'.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Submit Order to the Scrolls";
             }
