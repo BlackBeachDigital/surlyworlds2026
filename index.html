@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surly World Championships 2026 | Jersey Orders</title>
+    <title>Surly GM Jersey Order Form | Nottingham 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -25,39 +25,135 @@
         .cinzel { font-family: 'Cinzel', serif; }
 
         .form-container {
-            background: rgba(244, 241, 234, 0.95);
-            backdrop-filter: blur(5px);
+            background: rgba(244, 241, 234, 0.97);
+            backdrop-filter: blur(8px);
             border: 2px solid var(--nottingham-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
 
+        /* Decorative Separator */
+        .kit-separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .kit-separator::before, .kit-separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px solid var(--nottingham-gold);
+            opacity: 0.2;
+        }
+        .kit-separator:not(:empty)::before { margin-right: 1.5em; }
+        .kit-separator:not(:empty)::after { margin-left: 1.5em; }
+
+        /* Solid Color Kit Sections */
+        .kit-section {
+            padding: 2rem;
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .blue-section { background-color: #1e3a8a; color: white; }
+        .red-section { background-color: #991b1b; color: white; }
+        .white-section { background-color: #e5e7eb; color: #1a3c34; }
+        .shorts-section { background-color: #000000; color: white; }
+
         .section-header {
-            background: var(--forest-green);
-            color: white;
             padding: 1rem;
-            border-radius: 4px;
-            margin: 2rem 0 1rem 0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .white-section .section-header {
+            background: var(--forest-green);
+            color: white;
+            border: none;
         }
 
         .card {
             background: white;
             border: 1px solid #ddd;
-            transition: transform 0.2s;
+            transition: all 0.2s ease-in-out;
+            color: #2d2d2d;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        /* Force labels inside cards to be dark */
+        .card label {
+            color: #2d2d2d !important;
+        }
+
+        /* Image & Lightbox */
+        .img-container {
+            position: relative;
+            cursor: zoom-in;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #fff;
+            border: 4px solid rgba(255,255,255,0.2);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .img-container img {
+            transition: transform 0.3s ease;
+            max-height: 250px;
+            object-fit: contain;
+        }
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+        .magnify-icon {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: var(--nottingham-gold);
+            color: #1a3c34;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        #lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            border: 3px solid var(--nottingham-gold);
+            border-radius: 8px;
         }
 
         input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
             border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 0.5rem;
+            border-radius: 6px;
+            padding: 0.6rem;
             width: 100%;
             background: white;
         }
@@ -65,29 +161,25 @@
         .submit-btn {
             background: var(--nottingham-gold);
             color: #1a3c34;
-            font-weight: bold;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             transition: all 0.3s;
         }
-
         .submit-btn:hover {
-            background: #b38f4a;
-            transform: scale(1.02);
+            background: #e0bc7a;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
-        .mockup-img {
-            max-height: 300px;
-            object-fit: contain;
+        /* Labels in dark sections (specifically for top-level titles) */
+        .blue-section > label, 
+        .red-section > label, 
+        .shorts-section > label, 
+        .number-section > label {
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        .kit-img {
-            max-height: 200px;
-            object-fit: contain;
-            margin: 0 auto;
-        }
-
-        /* Success Message Overlay */
         #successOverlay {
             display: none;
             position: fixed;
@@ -95,260 +187,137 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 100;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             color: white;
+            text-align: center;
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <div id="successOverlay">
-        <div class="text-center p-8 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20">
-            <h2 class="cinzel text-4xl mb-4">Quest Complete!</h2>
-            <p class="text-xl">Your order has been recorded in the scrolls.</p>
-            <button onclick="location.reload()" class="mt-6 px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors">Submit Another</button>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" onclick="this.style.display='none'">
+        <div class="relative w-full h-full flex items-center justify-center">
+            <span class="absolute top-4 right-4 text-white text-5xl cursor-pointer font-bold">&times;</span>
+            <img id="lightboxImg" src="" alt="Enlarged View">
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto form-container rounded-xl p-6 md:p-12 relative overflow-hidden">
+    <!-- Success Message -->
+    <div id="successOverlay">
+        <div class="p-10 bg-emerald-900 rounded-3xl border-2 border-yellow-500 max-w-lg shadow-2xl">
+            <h2 class="cinzel text-5xl mb-6 text-yellow-500 font-bold">Quest Complete!</h2>
+            <p class="text-2xl mb-8 leading-relaxed">The message has been delivered to Sherwood.</p>
+            <button onclick="location.reload()" class="px-10 py-4 bg-yellow-500 text-emerald-900 rounded-full font-black text-xl hover:bg-white transition-all transform hover:scale-105 shadow-xl">Submit Another Order</button>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto form-container rounded-[2rem] p-6 md:p-12 relative overflow-hidden">
         
-        <!-- Header Logos -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
-            <img src="https://surlyworlds2026.netlify.app/images/eagle-surly-logo-color.svg" alt="Surly Logo" class="w-48 h-auto">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
+            <img src="https://surlyworlds2026.netlify.app/images/eagle-surly-logo-color.svg" alt="Surly Logo" class="w-44 h-auto drop-shadow-sm">
             <div class="text-center">
-                <h1 class="cinzel text-3xl md:text-5xl font-bold text-gray-800 tracking-tighter uppercase">Surwood Forest</h1>
-                <p class="cinzel text-lg text-emerald-800 mt-2 font-bold uppercase tracking-widest">WMUCC Nottingham 2026</p>
+                <h1 class="cinzel text-3xl md:text-5xl font-bold text-gray-800 tracking-tighter uppercase leading-tight">Surly GM Jersey<br>Order Form</h1>
+                <p class="cinzel text-lg text-emerald-800 mt-2 font-bold uppercase tracking-[0.25em]">WMUCC Nottingham 2026</p>
             </div>
-            <img src="https://surlyworlds2026.netlify.app/images/WMUCC-2026-Official-Logo.png" alt="WMUCC Logo" class="w-32 h-auto">
+            <img src="https://surlyworlds2026.netlify.app/images/WMUCC-2026-Official-Logo.png" alt="WMUCC Logo" class="w-44 h-auto drop-shadow-sm">
         </div>
 
         <form id="orderForm">
             <!-- PERSONAL DETAILS -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div>
-                    <label class="block font-bold mb-1">Full Name</label>
+                    <label class="block font-bold mb-2 text-emerald-900">Full Name</label>
                     <input type="text" name="playerName" required placeholder="Robin of Locksley">
                 </div>
                 <div>
-                    <label class="block font-bold mb-1">Email Address</label>
+                    <label class="block font-bold mb-2 text-emerald-900">Email Address</label>
                     <input type="email" name="email" required placeholder="robin@sherwood.com">
                 </div>
                 <div>
-                    <label class="block font-bold mb-1">Phone Number</label>
+                    <label class="block font-bold mb-2 text-emerald-900">Phone Number</label>
                     <input type="tel" name="phone" required placeholder="555-555-5555">
                 </div>
             </div>
 
             <!-- JERSEY NUMBER -->
-            <div class="bg-amber-50 p-6 border-l-4 border-amber-500 rounded-lg mb-8 shadow-sm">
-                <label class="block font-bold mb-1">Jersey Number</label>
-                <input type="text" name="jerseyNumber" placeholder="Enter # or 'None'">
-                <p class="text-sm italic mt-3 text-amber-900 leading-relaxed">
-                    <strong>Note:</strong> If you would like to order a jersey with a different number for a family member or friend, simply fill out this form a second time with the same email address.
-                </p>
+            <div class="kit-section shorts-section mb-12 shadow-xl">
+                <label class="block font-bold mb-3 text-white text-xl cinzel uppercase tracking-wider">Jersey Number Selection</label>
+                <input type="text" name="jerseyNumber" placeholder="Enter # or 'None'" class="text-gray-900 font-bold text-lg focus:ring-4 focus:ring-yellow-500">
+                <div class="text-sm italic mt-4 text-gray-300 leading-relaxed bg-white/10 p-4 rounded-xl border border-white/10">
+                    <strong class="text-yellow-500">Note:</strong> If you would like to order a jersey with a different number for a family member or friend, simply fill out this form a second time with the same email address.
+                </div>
             </div>
 
-            <!-- KIT SECTIONS -->
-            
             <!-- BLUE KIT -->
-            <div class="section-header cinzel text-xl">
-                <span>The Blue Kit</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <img src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" class="kit-img rounded-lg" alt="Blue Kit">
-                <img src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" class="mockup-img rounded-lg" alt="Blue Mockup">
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Short Sleeve</h3>
-                    <input type="number" name="blueSSQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="blueSSSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Men's">
-                            <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
-                            <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                        <optgroup label="Youth/Kids">
-                            <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
-                            <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
-                        </optgroup>
-                    </select>
+            <div class="kit-section blue-section">
+                <div class="section-header cinzel text-3xl">
+                    <span>THE BLUE KIT</span>
                 </div>
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Long Sleeve</h3>
-                    <input type="number" name="blueLSQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="blueLSSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Men's">
-                            <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
-                            <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" alt="Blue Kit">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" alt="Blue Mockup">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
                 </div>
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Hoodie</h3>
-                    <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="blueHoodieSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Unisex">
-                            <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
-                            <option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-
-            <!-- RED KIT -->
-            <div class="section-header cinzel text-xl">
-                <span>The Red Kit</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <img src="https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg" class="kit-img rounded-lg" alt="Red Kit">
-                <img src="https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg" class="mockup-img rounded-lg" alt="Red Mockup">
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Short Sleeve</h3>
-                    <input type="number" name="redSSQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="redSSSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Men's">
-                            <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
-                            <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                        <optgroup label="Youth/Kids">
-                            <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
-                            <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Long Sleeve</h3>
-                    <input type="number" name="redLSQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="redLSSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Men's">
-                            <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
-                            <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Hoodie</h3>
-                    <input type="number" name="redHoodieQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="redHoodieSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Unisex">
-                            <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
-                            <option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-
-            <!-- WHITE KIT -->
-            <div class="section-header cinzel text-xl">
-                <span>The White Kit</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                <img src="https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg" class="kit-img rounded-lg" alt="White Kit">
-                <img src="https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg" class="mockup-img rounded-lg" alt="White Mockup">
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Short Sleeve</h3>
-                    <input type="number" name="whiteSSQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="whiteSSSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Men's">
-                            <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
-                            <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                        <optgroup label="Youth/Kids">
-                            <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
-                            <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Long Sleeve</h3>
-                    <input type="number" name="whiteLSQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="whiteLSSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Men's">
-                            <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
-                            <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="card p-4 rounded-lg">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Hoodie</h3>
-                    <input type="number" name="whiteHoodieQty" value="0" min="0" class="mb-2" placeholder="Qty">
-                    <select name="whiteHoodieSize">
-                        <option value="">Select Size</option>
-                        <optgroup label="Unisex">
-                            <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
-                            <option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option>
-                        </optgroup>
-                        <optgroup label="Women's">
-                            <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
-                            <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-
-            <!-- SHORTS -->
-            <div class="section-header cinzel text-xl">
-                <span>The Shorts</span>
-            </div>
-            <div class="flex flex-col md:flex-row gap-8 items-center mb-12">
-                <img src="https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg" class="h-48 w-auto rounded shadow-lg" alt="Red Shorts">
-                <div class="card p-6 rounded-lg flex-1 w-full">
-                    <h3 class="font-bold border-b pb-2 mb-3 text-sm">Red Shorts</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="number" name="redShortsQty" value="0" min="0" placeholder="Qty">
-                        <select name="redShortsSize">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Short Sleeve</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="blueSSQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="blueSSSize" class="text-xs">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
-                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option>
-                                <option>Men's L</option><option>Men's XL</option><option>Men's XXL</option>
+                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
+                                <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                            <optgroup label="Youth/Kids">
+                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
+                                <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Long Sleeve</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="blueLSQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="blueLSSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Men's">
+                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
+                                <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Hoodie</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="blueHoodieSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Unisex">
+                                <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
+                                <option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option>
                             </optgroup>
                             <optgroup label="Women's">
                                 <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
@@ -359,19 +328,213 @@
                 </div>
             </div>
 
+            <div class="kit-separator"></div>
+
+            <!-- RED KIT -->
+            <div class="kit-section red-section">
+                <div class="section-header cinzel text-3xl">
+                    <span>THE RED KIT</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg" alt="Red Kit">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg" alt="Red Mockup">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-red-900 text-xs uppercase tracking-wider">Red Short Sleeve</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="redSSQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="redSSSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Men's">
+                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
+                                <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                            <optgroup label="Youth/Kids">
+                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
+                                <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-red-900 text-xs uppercase tracking-wider">Red Long Sleeve</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="redLSQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="redLSSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Men's">
+                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
+                                <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-red-900 text-xs uppercase tracking-wider">Red Hoodie</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="redHoodieQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="redHoodieSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Unisex">
+                                <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
+                                <option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kit-separator"></div>
+
+            <!-- WHITE KIT -->
+            <div class="kit-section white-section">
+                <div class="section-header cinzel text-3xl">
+                    <span>THE WHITE KIT</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="img-container shadow-xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg" alt="White Kit">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                    <div class="img-container shadow-xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg" alt="White Mockup">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-emerald-900 text-xs uppercase tracking-wider">White Short Sleeve</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="whiteSSQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="whiteSSSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Men's">
+                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
+                                <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                            <optgroup label="Youth/Kids">
+                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
+                                <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-emerald-900 text-xs uppercase tracking-wider">White Long Sleeve</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="whiteLSQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="whiteLSSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Men's">
+                                <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
+                                <option>Men's XL</option><option>Men's XXL</option><option>Men's 3XL</option><option>Men's 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="card p-5 rounded-2xl">
+                        <h3 class="font-bold border-b pb-2 mb-4 text-emerald-900 text-xs uppercase tracking-wider">White Hoodie</h3>
+                        <label class="block text-[10px] font-bold mb-1">Quantity</label>
+                        <input type="number" name="whiteHoodieQty" value="0" min="0" class="mb-4 text-sm">
+                        <label class="block text-[10px] font-bold mb-1">Size</label>
+                        <select name="whiteHoodieSize" class="text-xs">
+                            <option value="">Select Size</option>
+                            <optgroup label="Unisex">
+                                <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
+                                <option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option>
+                            </optgroup>
+                            <optgroup label="Women's">
+                                <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kit-separator"></div>
+
+            <!-- SHORTS -->
+            <div class="kit-section shorts-section">
+                <div class="section-header cinzel text-3xl">
+                    <span>THE SHORTS</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg" alt="Red Shorts">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-shorts-mock-v1.jpg')">
+                        <img src="https://surlyworlds2026.netlify.app/images/surly-shorts-mock-v1.jpg" alt="Shorts Mockup">
+                        <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
+                    </div>
+                </div>
+                <div class="card p-8 rounded-2xl border-t-4 border-t-red-700">
+                    <h3 class="font-bold border-b pb-3 mb-6 text-2xl text-red-700 uppercase tracking-tighter">Red Shorts</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Quantity</label>
+                            <input type="number" name="redShortsQty" value="0" min="0" placeholder="Qty">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Size</label>
+                            <select name="redShortsSize" class="text-sm">
+                                <option value="">Select Size</option>
+                                <optgroup label="Men's">
+                                    <option>Men's XS</option><option>Men's S</option><option>Men's M</option>
+                                    <option>Men's L</option><option>Men's XL</option><option>Men's XXL</option>
+                                </optgroup>
+                                <optgroup label="Women's">
+                                    <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
+                                    <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- COMMENTS -->
-            <div class="mb-12">
-                <label class="block font-bold mb-2">Any comments or special requests?</label>
-                <textarea name="comments" rows="3" placeholder="Tell us more..."></textarea>
+            <div class="my-16">
+                <label class="block font-bold mb-3 text-emerald-900 text-xl">Any comments or special requests?</label>
+                <textarea name="comments" rows="4" placeholder="Specific notes for the quest master..."></textarea>
             </div>
 
             <!-- SUBMIT -->
-            <button type="submit" id="submitBtn" class="w-full py-5 rounded-lg submit-btn cinzel text-2xl shadow-xl">
-                Submit Order to the Scrolls
+            <button type="submit" id="submitBtn" class="w-full py-8 rounded-3xl submit-btn cinzel text-4xl shadow-2xl mt-8">
+                Submit Jersey Order
             </button>
         </form>
 
-        <div class="mt-12 text-center text-xs opacity-60 uppercase tracking-widest font-semibold text-emerald-900">
+        <div class="mt-20 text-center text-xs opacity-60 uppercase tracking-[0.5em] font-black text-emerald-900">
             &copy; 2026 Surly Ultimate - Nottingham World Championships Quest
         </div>
     </div>
@@ -380,18 +543,28 @@
         const form = document.getElementById('orderForm');
         const submitBtn = document.getElementById('submitBtn');
         const overlay = document.getElementById('successOverlay');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        function openLightbox(url) {
+            lightboxImg.src = url;
+            lightbox.style.display = 'flex';
+        }
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // HARDCODED GOOGLE WEB APP URL
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec';
 
             submitBtn.disabled = true;
-            submitBtn.innerText = "Dispatching Messenger...";
+            submitBtn.innerHTML = `
+                <span class="inline-flex items-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-emerald-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    Dispatching...
+                </span>
+            `;
 
             try {
-                // Using URLSearchParams ensures data is sent in a format Google Script can easily read
                 const formData = new FormData(form);
                 const params = new URLSearchParams(formData);
 
@@ -404,15 +577,13 @@
                     }
                 });
 
-                // In 'no-cors' mode, we won't get a response object we can read,
-                // but if the fetch completes without throwing, the request was fired.
                 overlay.style.display = 'flex';
                 
             } catch (err) {
                 console.error(err);
-                alert("The messenger was intercepted! Please check your connection or script permissions.");
+                alert("The messenger was intercepted! Please check your connection.");
                 submitBtn.disabled = false;
-                submitBtn.innerText = "Submit Order to the Scrolls";
+                submitBtn.innerText = "Submit Jersey Order";
             }
         });
     </script>
