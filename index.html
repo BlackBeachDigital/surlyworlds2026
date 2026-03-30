@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surly GM Jersey Order Form | Nottingham 2026</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://surlyworlds2026.netlify.app/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -11,6 +13,7 @@
             --forest-green: #1a3c34;
             --nottingham-gold: #c5a059;
             --parchment: #f4f1ea;
+            --surly-blue: #1e3a8a;
         }
 
         body {
@@ -72,7 +75,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        /* Updated White Kit Header to Dark Gray */
         .white-section .section-header {
             background: #374151;
             color: white;
@@ -94,7 +96,7 @@
             color: #2d2d2d !important;
         }
 
-        /* Image & Lightbox refined with Top-Right Magnify and 50% Opacity */
+        /* Image & Lightbox */
         .img-container {
             position: relative;
             cursor: zoom-in;
@@ -160,15 +162,15 @@
         }
 
         .submit-btn {
-            background: var(--nottingham-gold);
-            color: #1a3c34;
+            background-color: var(--surly-blue);
+            color: white;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
         }
         .submit-btn:hover {
-            background: #e0bc7a;
+            background-color: #1e40af;
             transform: translateY(-4px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
@@ -247,7 +249,8 @@
 
             <!-- JERSEY NUMBER -->
             <div class="kit-section shorts-section mb-12 shadow-xl">
-                <label class="block font-bold mb-3 text-white text-xl cinzel uppercase tracking-wider">Jersey Number Selection</label>
+                <label class="block font-bold text-white text-3xl cinzel uppercase tracking-wider">JERSEY NUMBER</label>
+                <p class="text-white/80 text-sm mb-4">What number do you want printed on your jersey and shorts?</p>
                 <input type="text" name="jerseyNumber" placeholder="Enter # or 'None'" class="text-gray-900 font-bold text-lg focus:ring-4 focus:ring-yellow-500">
                 <div class="text-sm italic mt-4 text-gray-300 leading-relaxed bg-white/10 p-4 rounded-xl border border-white/10">
                     <strong class="text-yellow-500">Note:</strong> If you would like to order a jersey with a different number for a family member or friend, simply fill out this form a second time with the same email address.
@@ -285,9 +288,9 @@
                                 <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
                                 <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
                             </optgroup>
-                            <optgroup label="Youth/Kids">
-                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
+                            <optgroup label="Kid's/Youth">
                                 <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
+                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
                             </optgroup>
                         </select>
                     </div>
@@ -361,9 +364,9 @@
                                 <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
                                 <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
                             </optgroup>
-                            <optgroup label="Youth/Kids">
-                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
+                            <optgroup label="Kid's/Youth">
                                 <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
+                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
                             </optgroup>
                         </select>
                     </div>
@@ -437,9 +440,9 @@
                                 <option>Women's XS</option><option>Women's S</option><option>Women's M</option>
                                 <option>Women's L</option><option>Women's XL</option><option>Women's XXL</option>
                             </optgroup>
-                            <optgroup label="Youth/Kids">
-                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
+                            <optgroup label="Kid's/Youth">
                                 <option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option>
+                                <option>YS</option><option>YM</option><option>YL</option><option>YXL</option>
                             </optgroup>
                         </select>
                     </div>
@@ -525,13 +528,17 @@
             <!-- COMMENTS -->
             <div class="my-16">
                 <label class="block font-bold mb-3 text-emerald-900 text-xl">Any comments or special requests?</label>
-                <textarea name="comments" rows="4" placeholder="Specific notes for the quest master..."></textarea>
+                <textarea name="comments" rows="4" placeholder="Put special requests, questions, or comments here."></textarea>
             </div>
 
             <!-- SUBMIT -->
-            <button type="submit" id="submitBtn" class="w-full py-8 rounded-3xl submit-btn cinzel text-4xl shadow-2xl mt-8">
-                Submit Jersey Order
-            </button>
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <!-- Robin image resized to 50% smaller -->
+                <img src="https://surlyworlds2026.netlify.app/images/robin.png" alt="Robin" class="w-12 md:w-[72px] h-auto drop-shadow-lg">
+                <button type="submit" id="submitBtn" class="flex-1 py-8 rounded-3xl submit-btn cinzel text-2xl md:text-4xl shadow-2xl">
+                    Submit Jersey Order
+                </button>
+            </div>
         </form>
 
         <!-- Refined Footer with Enlarged Friar Tuck Integration -->
@@ -566,7 +573,7 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = `
                 <span class="inline-flex items-center">
-                    <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-emerald-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     Dispatching...
                 </span>
             `;
