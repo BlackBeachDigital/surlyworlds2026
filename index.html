@@ -209,11 +209,11 @@
         </div>
     </div>
 
-    <!-- Success Message (Blue and White Theme) -->
+    <!-- Success Message -->
     <div id="successOverlay">
-        <div class="p-10 bg-[#1e3a8a] rounded-3xl border-2 border-white max-w-lg shadow-2xl mx-4">
-            <h2 class="cinzel text-5xl mb-6 text-white font-bold tracking-tighter">Order Received!</h2>
-            <p class="text-2xl mb-10 leading-relaxed text-white font-light">We will reach out to you with any questions about your order.</p>
+        <div class="p-10 bg-[#1e3a8a] rounded-3xl border-2 border-white max-w-lg shadow-2xl mx-4 text-center">
+            <h2 class="cinzel text-5xl mb-6 text-white font-bold tracking-tighter uppercase">Order Received!</h2>
+            <p class="text-2xl mb-10 leading-relaxed text-white font-light italic">We will reach out to you with any questions about your order.</p>
             <button onclick="location.reload()" class="w-full py-4 bg-white text-[#1e3a8a] rounded-full font-black text-xl hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl uppercase tracking-widest">Submit Another Order</button>
         </div>
     </div>
@@ -263,16 +263,17 @@
                     <span>THE BLUE KIT</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" alt="Blue Kit">
+                    <div class="img-container shadow-2xl" onclick="openLightbox(this)">
+                        <img id="img-blue-base" src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" alt="Blue Kit">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
-                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" alt="Blue Mockup">
+                    <div class="img-container shadow-2xl" onclick="openLightbox(this)">
+                        <img id="img-blue-mock" src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" alt="Blue Mockup">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- BLUE ORDER BOXES -->
                     <div class="card p-5 rounded-2xl">
                         <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Short Sleeve</h3>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
@@ -339,12 +340,12 @@
                     <span>THE RED KIT</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg" alt="Red Kit">
+                    <div class="img-container shadow-2xl" onclick="openLightbox(this)">
+                        <img id="img-red-base" src="https://surlyworlds2026.netlify.app/images/red-base-black-collar-worlds-v1.jpg" alt="Red Kit">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
-                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg" alt="Red Mockup">
+                    <div class="img-container shadow-2xl" onclick="openLightbox(this)">
+                        <img id="img-red-mock" src="https://surlyworlds2026.netlify.app/images/surly-red-mock-v1.jpg" alt="Red Mockup">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
                 </div>
@@ -415,12 +416,12 @@
                     <span>THE WHITE KIT</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="img-container shadow-xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg" alt="White Kit">
+                    <div class="img-container shadow-xl" onclick="openLightbox(this)">
+                        <img id="img-white-base" src="https://surlyworlds2026.netlify.app/images/white-base-red-collar-worlds-v1.jpg" alt="White Kit">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
-                    <div class="img-container shadow-xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg" alt="White Mockup">
+                    <div class="img-container shadow-xl" onclick="openLightbox(this)">
+                        <img id="img-white-mock" src="https://surlyworlds2026.netlify.app/images/surly-white-mock-v1.jpg" alt="White Mockup">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
                 </div>
@@ -491,12 +492,12 @@
                     <span>THE SHORTS</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg" alt="Red Shorts">
+                    <div class="img-container shadow-2xl" onclick="openLightbox(this)">
+                        <img id="img-shorts-base" src="https://surlyworlds2026.netlify.app/images/red-shorts-worlds.jpg" alt="Red Shorts">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
-                    <div class="img-container shadow-2xl" onclick="openLightbox('https://surlyworlds2026.netlify.app/images/surly-shorts-mock-v1.jpg')">
-                        <img src="https://surlyworlds2026.netlify.app/images/surly-shorts-mock-v1.jpg" alt="Shorts Mockup">
+                    <div class="img-container shadow-2xl" onclick="openLightbox(this)">
+                        <img id="img-shorts-mock" src="https://surlyworlds2026.netlify.app/images/surly-shorts-mock-v1.jpg" alt="Shorts Mockup">
                         <div class="magnify-icon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>
                     </div>
                 </div>
@@ -540,7 +541,7 @@
             </div>
         </form>
 
-        <!-- Refined Footer with Enlarged Friar Tuck Integration -->
+        <!-- Refined Footer -->
         <div class="mt-24 flex flex-col md:flex-row items-center justify-center gap-10 px-4 pb-12">
             <img src="https://surlyworlds2026.netlify.app/images/FRIAR.png" alt="Friar Tuck" class="w-64 md:w-72 h-auto drop-shadow-2xl">
             <div class="max-w-xl text-center md:text-left">
@@ -559,14 +560,47 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
 
-        function openLightbox(url) {
-            lightboxImg.src = url;
-            lightbox.style.display = 'flex';
+        // Dynamic CSV Loader
+        async function loadKitImages() {
+            const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=917819383&single=true&output=csv';
+            try {
+                const response = await fetch(csvUrl);
+                if (!response.ok) throw new Error('Network error');
+                const data = await response.text();
+                
+                // Split lines and parse CSV
+                const rows = data.split(/\r?\n/);
+                rows.forEach(row => {
+                    const columns = row.split(',');
+                    if (columns.length >= 2) {
+                        const key = columns[0].trim().toLowerCase();
+                        const url = columns[1].trim().replace(/^"|"$/g, '');
+                        
+                        // Targeting image IDs specifically
+                        const img = document.getElementById(`img-${key}`);
+                        if (img && url.startsWith('http')) {
+                            img.src = url;
+                        }
+                    }
+                });
+            } catch (err) {
+                console.warn("Dynamic image load failed. Using defaults.", err);
+            }
+        }
+
+        // Initialize dynamic images on load
+        window.addEventListener('DOMContentLoaded', loadKitImages);
+
+        function openLightbox(container) {
+            const img = container.querySelector('img');
+            if (img) {
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+            }
         }
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec';
 
             submitBtn.disabled = true;
@@ -585,9 +619,7 @@
                     method: 'POST',
                     body: params.toString(),
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 });
 
                 overlay.style.display = 'flex';
