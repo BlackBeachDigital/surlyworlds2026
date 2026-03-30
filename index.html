@@ -161,6 +161,12 @@
             background: white;
         }
 
+        /* Error state for required selects */
+        .error-border {
+            border: 3px solid #ef4444 !important;
+            background-color: #fef2f2 !important;
+        }
+
         .submit-btn {
             background-color: var(--surly-blue);
             color: white;
@@ -206,9 +212,44 @@
             margin-bottom: 0.75rem;
             display: block;
         }
+
+        /* Floating Total Box */
+        #floating-order-total {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--surly-blue);
+            color: white;
+            padding: 1.2rem 2rem;
+            border-radius: 1.5rem;
+            border: 3px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 400;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+            min-width: 200px;
+        }
+        #floating-order-total:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 640px) {
+            #floating-order-total {
+                bottom: 10px;
+                right: 10px;
+                padding: 0.8rem 1.2rem;
+                min-width: 150px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
+
+    <!-- Floating Order Total -->
+    <div id="floating-order-total" class="cinzel">
+        <div class="text-xs uppercase tracking-widest opacity-80 mb-1">Estimated Total</div>
+        <div id="display-total" class="text-2xl md:text-3xl font-bold">$0.00</div>
+    </div>
 
     <!-- Lightbox Modal -->
     <div id="lightbox" onclick="this.style.display='none'">
@@ -227,7 +268,7 @@
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto form-container rounded-[2rem] p-6 md:p-12 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto form-container rounded-[2rem] p-6 md:p-12 relative overflow-hidden mb-20">
         
         <!-- Header -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
@@ -286,9 +327,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Short Sleeve</h3>
                         <span id="price-blue-ss" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="blueSSQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="blueSSQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="blueSSSize" class="text-xs">
+                        <select name="blueSSSize" class="text-xs size-select" data-label="Blue Short Sleeve">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
                                 <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
@@ -308,9 +349,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Long Sleeve</h3>
                         <span id="price-blue-ls" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="blueLSQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="blueLSQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="blueLSSize" class="text-xs">
+                        <select name="blueLSSize" class="text-xs size-select" data-label="Blue Long Sleeve">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
                                 <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
@@ -326,9 +367,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Hoodie</h3>
                         <span id="price-blue-hoodie" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="blueHoodieSize" class="text-xs">
+                        <select name="blueHoodieSize" class="text-xs size-select" data-label="Blue Hoodie">
                             <option value="">Select Size</option>
                             <optgroup label="Unisex">
                                 <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
@@ -365,9 +406,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Short Sleeve</h3>
                         <span id="price-red-ss" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="redSSQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="redSSQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="redSSSize" class="text-xs">
+                        <select name="redSSSize" class="text-xs size-select" data-label="Red Short Sleeve">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
                                 <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
@@ -387,9 +428,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Long Sleeve</h3>
                         <span id="price-red-ls" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="redLSQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="redLSQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="redLSSize" class="text-xs">
+                        <select name="redLSSize" class="text-xs size-select" data-label="Red Long Sleeve">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
                                 <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
@@ -405,9 +446,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Hoodie</h3>
                         <span id="price-red-hoodie" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="redHoodieQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="redHoodieQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="redHoodieSize" class="text-xs">
+                        <select name="redHoodieSize" class="text-xs size-select" data-label="Red Hoodie">
                             <option value="">Select Size</option>
                             <optgroup label="Unisex">
                                 <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
@@ -444,9 +485,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Short Sleeve</h3>
                         <span id="price-white-ss" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="whiteSSQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="whiteSSQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="whiteSSSize" class="text-xs">
+                        <select name="whiteSSSize" class="text-xs size-select" data-label="White Short Sleeve">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
                                 <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
@@ -466,9 +507,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Long Sleeve</h3>
                         <span id="price-white-ls" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="whiteLSQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="whiteLSQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="whiteLSSize" class="text-xs">
+                        <select name="whiteLSSize" class="text-xs size-select" data-label="White Long Sleeve">
                             <option value="">Select Size</option>
                             <optgroup label="Men's">
                                 <option>Men's XS</option><option>Men's S</option><option>Men's M</option><option>Men's L</option>
@@ -484,9 +525,9 @@
                         <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Hoodie</h3>
                         <span id="price-white-hoodie" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="whiteHoodieQty" value="0" min="0" class="mb-4 text-sm">
+                        <input type="number" name="whiteHoodieQty" value="0" min="0" class="mb-4 text-sm qty-input">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="whiteHoodieSize" class="text-xs">
+                        <select name="whiteHoodieSize" class="text-xs size-select" data-label="White Hoodie">
                             <option value="">Select Size</option>
                             <optgroup label="Unisex">
                                 <option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option>
@@ -524,11 +565,11 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-sm font-bold mb-2 text-black">Quantity</label>
-                            <input type="number" name="redShortsQty" value="0" min="0" placeholder="Qty">
+                            <input type="number" name="redShortsQty" value="0" min="0" placeholder="Qty" class="qty-input">
                         </div>
                         <div>
                             <label class="block text-sm font-bold mb-2 text-black">Size</label>
-                            <select name="redShortsSize" class="text-sm">
+                            <select name="redShortsSize" class="text-sm size-select" data-label="Red Shorts">
                                 <option value="">Select Size</option>
                                 <optgroup label="Men's">
                                     <option>Men's XS</option><option>Men's S</option><option>Men's M</option>
@@ -551,11 +592,16 @@
             </div>
 
             <!-- SUBMIT -->
-            <div class="flex items-center justify-center gap-4 mt-8">
-                <img src="https://surlyworlds2026.netlify.app/images/robin.png" alt="Robin" class="w-12 md:w-[72px] h-auto drop-shadow-lg">
-                <button type="submit" id="submitBtn" class="flex-1 py-8 rounded-3xl submit-btn cinzel text-2xl md:text-4xl shadow-2xl">
-                    Submit Jersey Order
-                </button>
+            <div class="flex flex-col items-center justify-center gap-4 mt-8">
+                <div class="flex items-center justify-center gap-4 w-full">
+                    <img src="https://surlyworlds2026.netlify.app/images/robin.png" alt="Robin" class="w-12 md:w-[72px] h-auto drop-shadow-lg">
+                    <button type="submit" id="submitBtn" class="flex-1 py-8 rounded-3xl submit-btn cinzel text-2xl md:text-4xl shadow-2xl">
+                        Submit Jersey Order
+                    </button>
+                </div>
+                <!-- Error Message Container -->
+                <div id="validation-errors" class="hidden w-full p-4 bg-red-100 border-2 border-red-500 rounded-xl text-red-700 font-bold text-sm md:text-base mt-4 animate-bounce">
+                </div>
             </div>
         </form>
 
@@ -577,65 +623,134 @@
         const overlay = document.getElementById('successOverlay');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
+        const errorContainer = document.getElementById('validation-errors');
+        
+        let itemPrices = {};
 
-        // Robust CSV Normalizer & Loader
         async function loadDataFromSpreadsheet() {
             const imgCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=917819383&single=true&output=csv';
             const priceCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=390358242&single=true&output=csv';
 
-            // Mapper to handle friendly spreadsheet names
             const mapKey = (input) => {
                 const normalized = input.trim().toLowerCase();
-                if (normalized.includes('blue') && normalized.includes('short')) return 'blue-ss';
-                if (normalized.includes('blue') && normalized.includes('long')) return 'blue-ls';
-                if (normalized.includes('blue') && normalized.includes('hoodie')) return 'blue-hoodie';
-                if (normalized.includes('red') && normalized.includes('short')) return 'red-ss';
-                if (normalized.includes('red') && normalized.includes('long')) return 'red-ls';
-                if (normalized.includes('red') && normalized.includes('hoodie')) return 'red-hoodie';
-                if (normalized.includes('white') && normalized.includes('short')) return 'white-ss';
-                if (normalized.includes('white') && normalized.includes('long')) return 'white-ls';
-                if (normalized.includes('white') && normalized.includes('hoodie')) return 'white-hoodie';
-                if (normalized.includes('short')) return 'shorts'; // Generic shorts match
-                return normalized.replace(/[\s_]+/g, '-'); // Fallback to hyphenated
+                if (normalized.includes('blue') && normalized.includes('short')) return { id: 'blue-ss', input: 'blueSSQty' };
+                if (normalized.includes('blue') && normalized.includes('long')) return { id: 'blue-ls', input: 'blueLSQty' };
+                if (normalized.includes('blue') && normalized.includes('hoodie')) return { id: 'blue-hoodie', input: 'blueHoodieQty' };
+                if (normalized.includes('red') && normalized.includes('short')) return { id: 'red-ss', input: 'redSSQty' };
+                if (normalized.includes('red') && normalized.includes('long')) return { id: 'red-ls', input: 'redLSQty' };
+                if (normalized.includes('red') && normalized.includes('hoodie')) return { id: 'red-hoodie', input: 'redHoodieQty' };
+                if (normalized.includes('white') && normalized.includes('short')) return { id: 'white-ss', input: 'whiteSSQty' };
+                if (normalized.includes('white') && normalized.includes('long')) return { id: 'white-ls', input: 'whiteLSQty' };
+                if (normalized.includes('white') && normalized.includes('hoodie')) return { id: 'white-hoodie', input: 'whiteHoodieQty' };
+                if (normalized.includes('short')) return { id: 'shorts', input: 'redShortsQty' }; 
+                return { id: normalized.replace(/[\s_]+/g, '-'), input: '' };
             };
 
-            // Load Images
             try {
                 const response = await fetch(imgCsvUrl);
                 const data = await response.text();
                 data.split(/\r?\n/).forEach(row => {
                     const columns = row.split(',');
                     if (columns.length >= 2) {
-                        const key = mapKey(columns[0]);
+                        const keyInfo = mapKey(columns[0]);
                         const url = columns[1].trim().replace(/^"|"$/g, '');
-                        const img = document.getElementById(`img-${key}`);
+                        const img = document.getElementById(`img-${keyInfo.id}`);
                         if (img && url.startsWith('http')) img.src = url;
                     }
                 });
             } catch (err) { console.warn("Image load failed.", err); }
 
-            // Load Prices
             try {
                 const response = await fetch(priceCsvUrl);
                 const data = await response.text();
                 data.split(/\r?\n/).forEach(row => {
                     const columns = row.split(',');
                     if (columns.length >= 2) {
-                        const key = mapKey(columns[0]);
-                        let price = columns[1].trim().replace(/^"|"$/g, '');
-                        const priceEl = document.getElementById(`price-${key}`);
+                        const keyInfo = mapKey(columns[0]);
+                        let priceRaw = columns[1].trim().replace(/^"|"$/g, '').replace('$', '');
+                        const priceNum = parseFloat(priceRaw);
                         
-                        if (priceEl && price && price.toLowerCase() !== 'price') { // Ignore header row
-                            // Ensure there is a $ sign
-                            if (!price.startsWith('$')) price = '$' + price;
-                            priceEl.innerText = `${price} each`;
+                        if (keyInfo.id && !isNaN(priceNum)) {
+                            if (keyInfo.input) itemPrices[keyInfo.input] = priceNum;
+                            const priceEl = document.getElementById(`price-${keyInfo.id}`);
+                            if (priceEl) priceEl.innerText = `$${priceNum.toFixed(2)} each`;
                         }
                     }
                 });
             } catch (err) { console.warn("Price load failed.", err); }
         }
 
-        window.addEventListener('DOMContentLoaded', loadDataFromSpreadsheet);
+        function calculateTotal() {
+            let total = 0;
+            const qtyInputs = document.querySelectorAll('.qty-input');
+            qtyInputs.forEach(input => {
+                const qty = parseInt(input.value) || 0;
+                const price = itemPrices[input.name] || 0;
+                total += (qty * price);
+            });
+            document.getElementById('display-total').innerText = `$${total.toFixed(2)}`;
+        }
+
+        function validateForm() {
+            let isValid = true;
+            let errors = [];
+            
+            // Reset previous validation states
+            document.querySelectorAll('.size-select').forEach(sel => sel.classList.remove('error-border'));
+            errorContainer.classList.add('hidden');
+            errorContainer.innerHTML = '';
+
+            // Map each Qty input to its Size select
+            const kitItems = [
+                { qty: 'blueSSQty', size: 'blueSSSize' },
+                { qty: 'blueLSQty', size: 'blueLSSize' },
+                { qty: 'blueHoodieQty', size: 'blueHoodieSize' },
+                { qty: 'redSSQty', size: 'redSSSize' },
+                { qty: 'redLSQty', size: 'redLSSize' },
+                { qty: 'redHoodieQty', size: 'redHoodieSize' },
+                { qty: 'whiteSSQty', size: 'whiteSSSize' },
+                { qty: 'whiteLSQty', size: 'whiteLSSize' },
+                { qty: 'whiteHoodieQty', size: 'whiteHoodieSize' },
+                { qty: 'redShortsQty', size: 'redShortsSize' }
+            ];
+
+            kitItems.forEach(item => {
+                const qtyInput = form.querySelector(`input[name="${item.qty}"]`);
+                const sizeSelect = form.querySelector(`select[name="${item.size}"]`);
+                const qtyValue = parseInt(qtyInput.value) || 0;
+
+                if (qtyValue > 0 && !sizeSelect.value) {
+                    isValid = false;
+                    sizeSelect.classList.add('error-border');
+                    errors.push(sizeSelect.getAttribute('data-label'));
+                }
+            });
+
+            if (!isValid) {
+                errorContainer.innerHTML = `⚠️ <span class="underline">Validation Error:</span> Please select a size for: ${errors.join(', ')}`;
+                errorContainer.classList.remove('hidden');
+                
+                // Scroll to the first error
+                const firstError = document.querySelector('.error-border');
+                if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            return isValid;
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadDataFromSpreadsheet();
+            document.querySelectorAll('.qty-input').forEach(input => {
+                input.addEventListener('input', calculateTotal);
+                input.addEventListener('change', calculateTotal);
+            });
+            // Clear errors when user makes a selection
+            document.querySelectorAll('.size-select').forEach(sel => {
+                sel.addEventListener('change', () => {
+                    if (sel.value) sel.classList.remove('error-border');
+                });
+            });
+        });
 
         function openLightbox(container) {
             const img = container.querySelector('img');
@@ -647,6 +762,10 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Run Validation
+            if (!validateForm()) return;
+
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec';
 
             submitBtn.disabled = true;
