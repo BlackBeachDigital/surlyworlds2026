@@ -197,6 +197,15 @@
             color: white;
             text-align: center;
         }
+
+        /* Price Label Styling */
+        .price-label {
+            color: #065f46; /* text-emerald-800 */
+            font-weight: 700;
+            font-size: 0.75rem; /* text-xs */
+            margin-bottom: 0.75rem;
+            display: block;
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -273,9 +282,9 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- BLUE ORDER BOXES -->
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Short Sleeve</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Short Sleeve</h3>
+                        <span id="price-blue-ss" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="blueSSQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -296,7 +305,8 @@
                         </select>
                     </div>
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Long Sleeve</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Long Sleeve</h3>
+                        <span id="price-blue-ls" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="blueLSQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -313,7 +323,8 @@
                         </select>
                     </div>
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-blue-900 text-xs uppercase tracking-wider">Blue Hoodie</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Hoodie</h3>
+                        <span id="price-blue-hoodie" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -351,7 +362,8 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-red-900 text-xs uppercase tracking-wider">Red Short Sleeve</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Short Sleeve</h3>
+                        <span id="price-red-ss" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="redSSQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -372,7 +384,8 @@
                         </select>
                     </div>
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-red-900 text-xs uppercase tracking-wider">Red Long Sleeve</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Long Sleeve</h3>
+                        <span id="price-red-ls" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="redLSQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -389,7 +402,8 @@
                         </select>
                     </div>
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-red-900 text-xs uppercase tracking-wider">Red Hoodie</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Hoodie</h3>
+                        <span id="price-red-hoodie" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="redHoodieQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -427,7 +441,8 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-emerald-900 text-xs uppercase tracking-wider">White Short Sleeve</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Short Sleeve</h3>
+                        <span id="price-white-ss" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="whiteSSQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -448,7 +463,8 @@
                         </select>
                     </div>
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-emerald-900 text-xs uppercase tracking-wider">White Long Sleeve</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Long Sleeve</h3>
+                        <span id="price-white-ls" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="whiteLSQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -465,7 +481,8 @@
                         </select>
                     </div>
                     <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-2 mb-4 text-emerald-900 text-xs uppercase tracking-wider">White Hoodie</h3>
+                        <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Hoodie</h3>
+                        <span id="price-white-hoodie" class="price-label"></span>
                         <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
                         <input type="number" name="whiteHoodieQty" value="0" min="0" class="mb-4 text-sm">
                         <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
@@ -502,7 +519,8 @@
                     </div>
                 </div>
                 <div class="card p-8 rounded-2xl border-t-4 border-t-red-700">
-                    <h3 class="font-bold border-b pb-3 mb-6 text-2xl text-red-700 uppercase tracking-tighter">Red Shorts</h3>
+                    <h3 class="font-bold border-b pb-1 mb-2 text-2xl text-red-700 uppercase tracking-tighter">Red Shorts</h3>
+                    <span id="price-shorts" class="price-label !text-base !mb-6"></span>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-sm font-bold mb-2 text-black">Quantity</label>
@@ -560,36 +578,64 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
 
-        // Dynamic CSV Loader
-        async function loadKitImages() {
-            const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=917819383&single=true&output=csv';
+        // Robust CSV Normalizer & Loader
+        async function loadDataFromSpreadsheet() {
+            const imgCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=917819383&single=true&output=csv';
+            const priceCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=390358242&single=true&output=csv';
+
+            // Mapper to handle friendly spreadsheet names
+            const mapKey = (input) => {
+                const normalized = input.trim().toLowerCase();
+                if (normalized.includes('blue') && normalized.includes('short')) return 'blue-ss';
+                if (normalized.includes('blue') && normalized.includes('long')) return 'blue-ls';
+                if (normalized.includes('blue') && normalized.includes('hoodie')) return 'blue-hoodie';
+                if (normalized.includes('red') && normalized.includes('short')) return 'red-ss';
+                if (normalized.includes('red') && normalized.includes('long')) return 'red-ls';
+                if (normalized.includes('red') && normalized.includes('hoodie')) return 'red-hoodie';
+                if (normalized.includes('white') && normalized.includes('short')) return 'white-ss';
+                if (normalized.includes('white') && normalized.includes('long')) return 'white-ls';
+                if (normalized.includes('white') && normalized.includes('hoodie')) return 'white-hoodie';
+                if (normalized.includes('short')) return 'shorts'; // Generic shorts match
+                return normalized.replace(/[\s_]+/g, '-'); // Fallback to hyphenated
+            };
+
+            // Load Images
             try {
-                const response = await fetch(csvUrl);
-                if (!response.ok) throw new Error('Network error');
+                const response = await fetch(imgCsvUrl);
                 const data = await response.text();
-                
-                // Split lines and parse CSV
-                const rows = data.split(/\r?\n/);
-                rows.forEach(row => {
+                data.split(/\r?\n/).forEach(row => {
                     const columns = row.split(',');
                     if (columns.length >= 2) {
-                        const key = columns[0].trim().toLowerCase();
+                        const key = mapKey(columns[0]);
                         const url = columns[1].trim().replace(/^"|"$/g, '');
-                        
-                        // Targeting image IDs specifically
                         const img = document.getElementById(`img-${key}`);
-                        if (img && url.startsWith('http')) {
-                            img.src = url;
+                        if (img && url.startsWith('http')) img.src = url;
+                    }
+                });
+            } catch (err) { console.warn("Image load failed.", err); }
+
+            // Load Prices
+            try {
+                const response = await fetch(priceCsvUrl);
+                const data = await response.text();
+                data.split(/\r?\n/).forEach(row => {
+                    const columns = row.split(',');
+                    if (columns.length >= 2) {
+                        const key = mapKey(columns[0]);
+                        let price = columns[1].trim().replace(/^"|"$/g, '');
+                        const priceEl = document.getElementById(`price-${key}`);
+                        
+                        if (priceEl && price && price.toLowerCase() !== 'price') { // Ignore header row
+                            // Ensure there is a $ sign
+                            if (!price.startsWith('$')) price = '$' + price;
+                            priceEl.innerText = `${price} each`;
                         }
                     }
                 });
-            } catch (err) {
-                console.warn("Dynamic image load failed. Using defaults.", err);
-            }
+            } catch (err) { console.warn("Price load failed.", err); }
         }
 
-        // Initialize dynamic images on load
-        window.addEventListener('DOMContentLoaded', loadKitImages);
+        window.addEventListener('DOMContentLoaded', loadDataFromSpreadsheet);
 
         function openLightbox(container) {
             const img = container.querySelector('img');
@@ -626,7 +672,6 @@
                 
             } catch (err) {
                 console.error(err);
-                alert("The messenger was intercepted! Please check your connection.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Submit Jersey Order";
             }
