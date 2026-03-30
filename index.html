@@ -7,7 +7,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://surlyworlds2026.netlify.app/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --forest-green: #1a3c34;
@@ -350,6 +350,15 @@
         <form id="orderForm">
             <input type="hidden" name="orderTotal" id="hidden-order-total" value="0.00">
 
+            <!-- Updated Instructions Section -->
+            <div class="mb-10 space-y-4 text-emerald-950 font-medium leading-relaxed bg-white/60 p-6 rounded-2xl border border-emerald-200 shadow-inner">
+                <p>• Please use the form below to build your 2026 jersey order. The prices shown below are the current best estimates based on our expected volume. You will receive an email in a few weeks with the final total owed, but expect it to be very close to the estimate shown.</p>
+                <p>• All orders will be sent in one shipment to Minnesota and either hand-delivered at Surly practice, or brought to Nottingham. If you are a non-player and want your order shipped direct, please mention that in the comments and expect an extra ≈$10 shipping fee added to your total due.</p>
+                <p>• All payments will be made via Venmo or Zelle.</p>
+                <p>• The jersey layouts below are to scale, but the jersey renderings shown on people are examples only and may not be exact.</p>
+            </div>
+
+            <!-- PERSONAL DETAILS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div>
                     <label class="block font-bold mb-2 text-emerald-900">Full Name</label>
@@ -370,7 +379,7 @@
                 <p class="text-white/80 text-sm mb-4">What number do you want printed on your jersey and shorts?</p>
                 <input type="text" name="jerseyNumber" placeholder="Enter # or 'None'" class="text-gray-900 font-bold text-lg focus:ring-4 focus:ring-yellow-500">
                 <div class="text-sm italic mt-4 text-gray-300 leading-relaxed bg-white/10 p-4 rounded-xl border border-white/10">
-                    <strong class="text-yellow-500">Note:</strong> If you would like to order a jersey with a different number for a family member or friend, simply fill out this form a second time with the same email address.
+                    <strong class="text-yellow-500">Note:</strong> If you would like to order a jersey with a different number (or no number at all) for a family member or friend, simply fill out this form a second time with the same email address.
                 </div>
             </div>
 
@@ -675,7 +684,6 @@
                 return { id: normalized.replace(/[\s_]+/g, '-'), input: '' };
             };
 
-            // Load Images
             try {
                 const response = await fetch(imgCsvUrl);
                 const data = await response.text();
@@ -690,7 +698,6 @@
                 });
             } catch (err) { console.warn("Image load failed.", err); }
 
-            // Load Prices and Size Guides
             try {
                 const response = await fetch(priceCsvUrl);
                 const data = await response.text();
