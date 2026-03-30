@@ -127,7 +127,8 @@
             justify-content: center;
             pointer-events: none;
             box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            opacity: 0.5;
+            opacity: 0.8;
+            z-index: 10;
         }
 
         #lightbox {
@@ -350,7 +351,7 @@
         <form id="orderForm">
             <input type="hidden" name="orderTotal" id="hidden-order-total" value="0.00">
 
-            <!-- Updated Instructions Section -->
+            <!-- Instructions Section -->
             <div class="mb-10 space-y-4 text-emerald-950 font-medium leading-relaxed bg-white/60 p-6 rounded-2xl border border-emerald-200 shadow-inner">
                 <p>• Please use the form below to build your 2026 jersey order. The prices shown below are the current best estimates based on our expected volume. You will receive an email in a few weeks with the final total owed, but expect it to be very close to the estimate shown.</p>
                 <p>• All orders will be sent in one shipment to Minnesota and either hand-delivered at Surly practice, or brought to Nottingham. If you are a non-player and want your order shipped direct, please mention that in the comments and expect an extra ≈$10 shipping fee added to your total due.</p>
@@ -669,21 +670,32 @@
             const imgCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=917819383&single=true&output=csv';
             const priceCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRMdaybCrFP4EuGmmDAFZrgUXnzsdNDmhRxURtaWKRKvDDyglUH5tXA8XAXcbdubJlvsTScPoRDT77Y/pub?gid=390358242&single=true&output=csv';
 
+            // New refined mapping logic to avoid overlapping keyword detection
             const mapKey = (input) => {
                 const normalized = input.trim().toLowerCase();
-                if (normalized.includes('blue') && normalized.includes('short')) return { id: 'blue-ss', input: 'blueSSQty' };
-                if (normalized.includes('blue') && normalized.includes('long')) return { id: 'blue-ls', input: 'blueLSQty' };
-                if (normalized.includes('blue') && normalized.includes('hoodie')) return { id: 'blue-hoodie', input: 'blueHoodieQty' };
-                if (normalized.includes('red') && normalized.includes('short')) return { id: 'red-ss', input: 'redSSQty' };
-                if (normalized.includes('red') && normalized.includes('long')) return { id: 'red-ls', input: 'redLSQty' };
-                if (normalized.includes('red') && normalized.includes('hoodie')) return { id: 'red-hoodie', input: 'redHoodieQty' };
-                if (normalized.includes('white') && normalized.includes('short')) return { id: 'white-ss', input: 'whiteSSQty' };
-                if (normalized.includes('white') && normalized.includes('long')) return { id: 'white-ls', input: 'whiteLSQty' };
-                if (normalized.includes('white') && normalized.includes('hoodie')) return { id: 'white-hoodie', input: 'whiteHoodieQty' };
-                if (normalized.includes('short')) return { id: 'shorts', input: 'redShortsQty' }; 
+                
+                // Check for Shorts specifically first
+                if (normalized.includes('shorts')) return { id: 'shorts', input: 'redShortsQty' };
+
+                // Jerseys
+                const color = normalized.includes('blue') ? 'blue' : 
+                              normalized.includes('red') ? 'red' : 
+                              normalized.includes('white') ? 'white' : '';
+                
+                if (normalized.includes('short sleeve') || normalized.includes('ss')) {
+                    return { id: `${color}-ss`, input: `${color}SSQty` };
+                }
+                if (normalized.includes('long sleeve') || normalized.includes('ls')) {
+                    return { id: `${color}-ls`, input: `${color}LSQty` };
+                }
+                if (normalized.includes('hoodie')) {
+                    return { id: `${color}-hoodie`, input: `${color}HoodieQty` };
+                }
+                
                 return { id: normalized.replace(/[\s_]+/g, '-'), input: '' };
             };
 
+            // Load Images
             try {
                 const response = await fetch(imgCsvUrl);
                 const data = await response.text();
@@ -698,6 +710,7 @@
                 });
             } catch (err) { console.warn("Image load failed.", err); }
 
+            // Load Prices and Size Guides
             try {
                 const response = await fetch(priceCsvUrl);
                 const data = await response.text();
