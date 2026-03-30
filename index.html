@@ -281,6 +281,9 @@
         </div>
 
         <form id="orderForm">
+            <!-- Hidden input for Order Total -->
+            <input type="hidden" name="orderTotal" id="hidden-order-total" value="0.00">
+
             <!-- PERSONAL DETAILS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div>
@@ -688,19 +691,19 @@
                 const price = itemPrices[input.name] || 0;
                 total += (qty * price);
             });
-            document.getElementById('display-total').innerText = `$${total.toFixed(2)}`;
+            const formattedTotal = total.toFixed(2);
+            document.getElementById('display-total').innerText = `$${formattedTotal}`;
+            document.getElementById('hidden-order-total').value = formattedTotal; // Push to hidden field
         }
 
         function validateForm() {
             let isValid = true;
             let errors = [];
             
-            // Reset previous validation states
             document.querySelectorAll('.size-select').forEach(sel => sel.classList.remove('error-border'));
             errorContainer.classList.add('hidden');
             errorContainer.innerHTML = '';
 
-            // Map each Qty input to its Size select
             const kitItems = [
                 { qty: 'blueSSQty', size: 'blueSSSize' },
                 { qty: 'blueLSQty', size: 'blueLSSize' },
@@ -729,8 +732,6 @@
             if (!isValid) {
                 errorContainer.innerHTML = `⚠️ <span class="underline">Validation Error:</span> Please select a size for: ${errors.join(', ')}`;
                 errorContainer.classList.remove('hidden');
-                
-                // Scroll to the first error
                 const firstError = document.querySelector('.error-border');
                 if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
@@ -744,7 +745,6 @@
                 input.addEventListener('input', calculateTotal);
                 input.addEventListener('change', calculateTotal);
             });
-            // Clear errors when user makes a selection
             document.querySelectorAll('.size-select').forEach(sel => {
                 sel.addEventListener('change', () => {
                     if (sel.value) sel.classList.remove('error-border');
@@ -762,8 +762,6 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // Run Validation
             if (!validateForm()) return;
 
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoSlQz-bKUdCx40Va0wGhFNA026d4UUeAkoENVBLwk_OPpy0uJqevCY-R7M3LOR42T/exec';
