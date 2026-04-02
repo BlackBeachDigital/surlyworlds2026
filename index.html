@@ -171,6 +171,40 @@
             cursor: zoom-out;
         }
 
+        /* Gallery Arrows */
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--nottingham-gold);
+            color: #1a3c34;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            font-weight: bold;
+            font-size: 18px;
+            opacity: 0.85;
+            transition: all 0.2s;
+        }
+        .gallery-arrow:hover { opacity: 1; transform: translateY(-50%) scale(1.1); }
+        .gallery-arrow.left { left: 10px; }
+        .gallery-arrow.right { right: 10px; }
+        
+        #lightbox .gallery-arrow {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+        }
+        #lightbox .gallery-arrow.left { left: 20px; }
+        #lightbox .gallery-arrow.right { right: 20px; }
+
         .zoom-controls {
             position: absolute;
             top: 20px;
@@ -308,13 +342,15 @@
 
     <!-- Lightbox Modal -->
     <div id="lightbox">
+        <button type="button" id="lb-prev" class="gallery-arrow left" style="display:none;" onclick="navLightbox(event, -1)">&#10094;</button>
+        <button type="button" id="lb-next" class="gallery-arrow right" style="display:none;" onclick="navLightbox(event, 1)">&#10095;</button>
         <div class="zoom-controls">
-            <button class="lightbox-btn" id="zoomToggle" title="Toggle Zoom">
+            <button type="button" class="lightbox-btn" id="zoomToggle" title="Toggle Zoom">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                 </svg>
             </button>
-            <button class="lightbox-btn" onclick="closeLightbox()" title="Close">
+            <button type="button" class="lightbox-btn" onclick="closeLightbox()" title="Close">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -690,6 +726,11 @@
         let itemPrices = {};
         let sizeGuides = {};
         let isZoomed = false;
+        
+        // Gallery State
+        const galleries = {};
+        const galleryIndex = {};
+        let currentLightboxGalleryId = null;
 
         const kitItems = [
             { qty: 'blueSSQty', size: 'blueSSSize' },
@@ -743,12 +784,48 @@
                 const response = await fetch(imgCsvUrl);
                 const data = await response.text();
                 data.split(/\r?\n/).forEach(row => {
-                    const columns = row.split(',');
+                    // Handles columns effectively even if URLs are wrapped in quotes
+                    const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if (columns.length >= 2) {
                         const keyInfo = mapKey(columns[0]);
-                        const url = columns[1].trim().replace(/^"|"$/g, '');
-                        const img = document.getElementById(`img-${keyInfo.id}`);
-                        if (img && url.startsWith('http')) img.src = url;
+                        if (!keyInfo.id) return;
+                        
+                        let urls = [];
+                        for (let i = 1; i < columns.length; i++) {
+                            if (columns[i]) {
+                                let url = columns[i].trim().replace(/^"|"$/g, '');
+                                if (url.startsWith('http')) urls.push(url);
+                            }
+                        }
+
+                        if (urls.length > 0) {
+                            galleries[keyInfo.id] = urls;
+                            galleryIndex[keyInfo.id] = 0;
+                            
+                            const img = document.getElementById(`img-${keyInfo.id}`);
+                            if (img) {
+                                img.src = urls[0];
+                                img.dataset.galleryId = keyInfo.id;
+                                
+                                // Inject arrows if multiple images exist
+                                if (urls.length > 1 && !img.parentElement.querySelector('.gallery-arrow')) {
+                                    const leftBtn = document.createElement('button');
+                                    leftBtn.type = 'button';
+                                    leftBtn.className = 'gallery-arrow left';
+                                    leftBtn.innerHTML = '&#10094;';
+                                    leftBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); navGallery(keyInfo.id, -1); };
+                                    
+                                    const rightBtn = document.createElement('button');
+                                    rightBtn.type = 'button';
+                                    rightBtn.className = 'gallery-arrow right';
+                                    rightBtn.innerHTML = '&#10095;';
+                                    rightBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); navGallery(keyInfo.id, 1); };
+                                    
+                                    img.parentElement.appendChild(leftBtn);
+                                    img.parentElement.appendChild(rightBtn);
+                                }
+                            }
+                        }
                     }
                 });
             } catch (err) { console.warn("Image load failed.", err); }
@@ -822,19 +899,65 @@
             document.getElementById('hidden-order-total').value = formattedTotal;
         }
 
+        // Navigation for Multi-Image Galleries
+        function navGallery(galleryId, direction) {
+            const urls = galleries[galleryId];
+            if (!urls || urls.length <= 1) return;
+            
+            let idx = galleryIndex[galleryId] + direction;
+            if (idx < 0) idx = urls.length - 1;
+            if (idx >= urls.length) idx = 0;
+            
+            galleryIndex[galleryId] = idx;
+            
+            // Update inline image
+            const imgEl = document.getElementById(`img-${galleryId}`);
+            if (imgEl) imgEl.src = urls[idx];
+            
+            // Sync lightbox if it's currently open
+            if (currentLightboxGalleryId === galleryId) {
+                resetZoom();
+                lightboxImg.src = urls[idx];
+            }
+        }
+
+        function navLightbox(e, direction) {
+            e.stopPropagation();
+            if (currentLightboxGalleryId) navGallery(currentLightboxGalleryId, direction);
+        }
+
         function openLightboxFromKit(container) {
             const img = container.querySelector('img');
-            if (img) showLightbox(img.src);
+            if (img) {
+                currentLightboxGalleryId = img.dataset.galleryId || null;
+                showLightbox(img.src);
+            }
         }
 
         function openSizeGuide(key) {
-            if (sizeGuides[key]) showLightbox(sizeGuides[key]);
+            if (sizeGuides[key]) {
+                currentLightboxGalleryId = null; // Disable gallery arrows for size guides
+                showLightbox(sizeGuides[key]);
+            }
         }
 
         function showLightbox(src) {
             lightboxImg.src = src;
+            updateLightboxArrows();
             lightbox.style.display = 'flex';
             resetZoom();
+        }
+
+        function updateLightboxArrows() {
+            const prev = document.getElementById('lb-prev');
+            const next = document.getElementById('lb-next');
+            if (currentLightboxGalleryId && galleries[currentLightboxGalleryId] && galleries[currentLightboxGalleryId].length > 1) {
+                prev.style.display = 'flex';
+                next.style.display = 'flex';
+            } else {
+                prev.style.display = 'none';
+                next.style.display = 'none';
+            }
         }
 
         function closeLightbox() {
