@@ -401,7 +401,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="card p-5 rounded-2xl">
                         <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Short Sleeve</h3>
                         <span id="price-blue-ss" class="price-label"></span>
@@ -415,6 +415,7 @@
                             <optgroup label="Kid's/Youth"><option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option><option>YS</option><option>YM</option><option>YL</option><option>YXL</option></optgroup>
                         </select>
                         <a class="size-guide-link" id="guide-blue-ss" onclick="openSizeGuide('blue-ss')">Size Guide</a>
+                        <p class="text-[10px] text-gray-500 italic mt-2 leading-tight">*Please note that WMUCC logo is not included on Youth Jerseys</p>
                     </div>
                     <div class="card p-5 rounded-2xl">
                         <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Long Sleeve</h3>
@@ -429,18 +430,53 @@
                         </select>
                         <a class="size-guide-link" id="guide-blue-ls" onclick="openSizeGuide('blue-ls')">Size Guide</a>
                     </div>
-                    <div class="card p-5 rounded-2xl">
-                        <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 text-xs uppercase tracking-wider">Blue Hoodie</h3>
-                        <span id="price-blue-hoodie" class="price-label"></span>
-                        <label class="block text-[10px] font-bold mb-1 text-black">Quantity</label>
-                        <input type="number" name="blueHoodieQty" value="0" min="0" class="mb-4 text-sm qty-input">
-                        <label class="block text-[10px] font-bold mb-1 text-black">Size</label>
-                        <select name="blueHoodieSize" class="text-xs size-select" data-label="Blue Hoodie" disabled>
-                            <option value="">Select Size</option>
-                            <optgroup label="Unisex"><option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option><option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option></optgroup>
-                            <optgroup label="Women's"><option>Women's XS</option><option>Women's S</option><option>Women's M</option><option>Women's L</option><option>Women's XL</option><option>Women's XXL</option></optgroup>
-                        </select>
-                        <a class="size-guide-link" id="guide-blue-hoodie" onclick="openSizeGuide('blue-hoodie')">Size Guide</a>
+                </div>
+            </div>
+
+            <div class="kit-separator"></div>
+
+            <!-- BLUE HOODIE -->
+            <div class="kit-section blue-section">
+                <div class="section-header cinzel text-3xl"><span>THE BLUE HOODIE</span></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="img-container shadow-2xl" onclick="openLightboxFromKit(this)">
+                        <img id="img-blue-hoodie-base" src="https://surlyworlds2026.netlify.app/images/blue-base-red-collar-worlds-v1.jpg" alt="Blue Hoodie Kit">
+                        <div class="magnify-icon">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        </div>
+                    </div>
+                    <div class="img-container shadow-2xl" onclick="openLightboxFromKit(this)">
+                        <img id="img-blue-hoodie-mock" src="https://surlyworlds2026.netlify.app/images/surly-blue-mock-v1.jpg" alt="Blue Hoodie Mockup">
+                        <div class="magnify-icon">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-8 rounded-2xl border-t-4 border-t-blue-900">
+                    <h3 class="font-bold border-b pb-1 mb-2 text-2xl text-blue-900 uppercase tracking-tighter">Blue Hoodie</h3>
+                    <span id="price-blue-hoodie" class="price-label !text-base !mb-6"></span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-black">Quantity</label>
+                            <input type="number" name="blueHoodieQty" value="0" min="0" placeholder="Qty" class="qty-input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-black">Size</label>
+                            <select name="blueHoodieSize" class="text-sm size-select" data-label="Blue Hoodie" disabled>
+                                <option value="">Select Size</option>
+                                <optgroup label="Unisex"><option>Unisex XS</option><option>Unisex S</option><option>Unisex M</option><option>Unisex L</option><option>Unisex XL</option><option>Unisex XXL</option><option>Unisex 3XL</option><option>Unisex 4XL</option></optgroup>
+                                <optgroup label="Women's"><option>Women's XS</option><option>Women's S</option><option>Women's M</option><option>Women's L</option><option>Women's XL</option><option>Women's XXL</option></optgroup>
+                            </select>
+                            <a class="size-guide-link" id="guide-blue-hoodie" onclick="openSizeGuide('blue-hoodie')">Size Guide</a>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-black">Number on Hoodie?</label>
+                            <select name="blueHoodieNumber" class="text-sm" disabled>
+                                <option value="">Select Option</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -478,6 +514,7 @@
                             <optgroup label="Kid's/Youth"><option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option><option>YS</option><option>YM</option><option>YL</option><option>YXL</option></optgroup>
                         </select>
                         <a class="size-guide-link" id="guide-red-ss" onclick="openSizeGuide('red-ss')">Size Guide</a>
+                        <p class="text-[10px] text-gray-500 italic mt-2 leading-tight">*Please note that WMUCC logo is not included on Youth Jerseys</p>
                     </div>
                     <div class="card p-5 rounded-2xl">
                         <h3 class="font-bold border-b pb-1 mb-2 text-red-900 text-xs uppercase tracking-wider">Red Long Sleeve</h3>
@@ -541,6 +578,7 @@
                             <optgroup label="Kid's/Youth"><option>Kids 2(S)</option><option>Kids 4(M)</option><option>Kids 6(L)</option><option>Kids 8(XL)</option><option>YS</option><option>YM</option><option>YL</option><option>YXL</option></optgroup>
                         </select>
                         <a class="size-guide-link" id="guide-white-ss" onclick="openSizeGuide('white-ss')">Size Guide</a>
+                        <p class="text-[10px] text-gray-500 italic mt-2 leading-tight">*Please note that WMUCC logo is not included on Youth Jerseys</p>
                     </div>
                     <div class="card p-5 rounded-2xl">
                         <h3 class="font-bold border-b pb-1 mb-2 text-emerald-900 text-xs uppercase tracking-wider">White Long Sleeve</h3>
@@ -674,6 +712,11 @@
             const mapKey = (input) => {
                 const normalized = input.trim().toLowerCase();
                 
+                // Safely let "base" and "mock" images map directly to their IDs so they don't get swallowed by the hoodie check
+                if (normalized.includes('base') || normalized.includes('mock')) {
+                    return { id: normalized.replace(/[\s_]+/g, '-'), input: '' };
+                }
+
                 // Check for Shorts specifically first
                 if (normalized.includes('shorts')) return { id: 'shorts', input: 'redShortsQty' };
 
@@ -757,6 +800,20 @@
                         sizeSelect.disabled = true;
                         sizeSelect.value = "";
                         sizeSelect.classList.remove('error-border');
+                    }
+                }
+
+                // Handle the new custom Blue Hoodie Number dropdown
+                if (input.name === 'blueHoodieQty') {
+                    const numSelect = form.querySelector('select[name="blueHoodieNumber"]');
+                    if (numSelect) {
+                        if (qty > 0) {
+                            numSelect.disabled = false;
+                        } else {
+                            numSelect.disabled = true;
+                            numSelect.value = "";
+                            numSelect.classList.remove('error-border');
+                        }
                     }
                 }
             });
@@ -848,7 +905,9 @@
             let isValid = true;
             let errors = [];
             document.querySelectorAll('.size-select').forEach(sel => sel.classList.remove('error-border'));
+            document.querySelectorAll('select[name="blueHoodieNumber"]').forEach(sel => sel.classList.remove('error-border'));
             errorContainer.classList.add('hidden');
+            
             kitItems.forEach(item => {
                 const qtyValue = parseInt(form.querySelector(`input[name="${item.qty}"]`).value) || 0;
                 const sizeSelect = form.querySelector(`select[name="${item.size}"]`);
@@ -857,9 +916,20 @@
                     sizeSelect.classList.add('error-border');
                     errors.push(sizeSelect.getAttribute('data-label'));
                 }
+
+                // Validate Blue Hoodie Number preference
+                if (item.qty === 'blueHoodieQty' && qtyValue > 0) {
+                    const numSelect = form.querySelector('select[name="blueHoodieNumber"]');
+                    if (numSelect && !numSelect.value) {
+                        isValid = false;
+                        numSelect.classList.add('error-border');
+                        errors.push('Blue Hoodie Number Preference');
+                    }
+                }
             });
+
             if (!isValid) {
-                errorContainer.innerHTML = `⚠️ <span class="underline">Validation Error:</span> Please select a size for: ${errors.join(', ')}`;
+                errorContainer.innerHTML = `⚠️ <span class="underline">Validation Error:</span> Please select an option for: ${errors.join(', ')}`;
                 errorContainer.classList.remove('hidden');
                 document.querySelector('.error-border')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
@@ -871,6 +941,13 @@
             document.querySelectorAll('.qty-input').forEach(input => {
                 input.addEventListener('input', calculateTotal);
                 input.addEventListener('change', calculateTotal);
+            });
+            
+            // Ensure error borders clear nicely when dropdowns are clicked
+            document.querySelectorAll('select').forEach(sel => {
+                sel.addEventListener('change', () => {
+                    if (sel.value) sel.classList.remove('error-border');
+                });
             });
         });
 
