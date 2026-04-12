@@ -169,6 +169,7 @@
             max-height: none;
             transform: scale(2);
             cursor: zoom-out;
+            touch-action: none; /* Prevents native mobile browser from interfering with our custom zoom/pan */
         }
 
         /* Gallery Arrows */
@@ -963,17 +964,33 @@
             if (isZoomed) {
                 lightboxImg.classList.add('zoomed');
                 lightboxWrapper.style.overflow = 'auto';
-                if (e && e.type === 'click') {
-                    const rect = lightboxImg.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+                if (e) {
+                    let clientX, clientY;
+                    
+                    // Handle touch coordinates for Double-Tap zooming
+                    if (e.type.includes('touch') && e.changedTouches) {
+                        clientX = e.changedTouches[0].clientX;
+                        clientY = e.changedTouches[0].clientY;
+                    } 
+                    // Handle mouse coordinates
+                    else if (e.type === 'click') {
+                        clientX = e.clientX;
+                        clientY = e.clientY;
+                    }
+
+                    if (clientX !== undefined && clientY !== undefined) {
+                        const rect = lightboxImg.getBoundingClientRect();
+                        const x = ((clientX - rect.left) / rect.width) * 100;
+                        const y = ((clientY - rect.top) / rect.height) * 100;
+                        lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+                    }
                 }
             } else {
                 resetZoom();
             }
         }
 
+        // --- DESKTOP MOUSE PANNING ---
         let isDown = false;
         let startX, startY, scrollLeft, scrollTop;
 
@@ -997,6 +1014,44 @@
             const walkY = (y - startY) * 2;
             lightboxWrapper.scrollLeft = scrollLeft - walkX;
             lightboxWrapper.scrollTop = scrollTop - walkY;
+        });
+
+        // --- MOBILE TOUCH PANNING ---
+        let isTouchDown = false;
+        let touchStartX, touchStartY;
+        let lastTap = 0;
+
+        lightboxWrapper.addEventListener('touchstart', (e) => {
+            if (!isZoomed) return;
+            isTouchDown = true;
+            touchStartX = e.touches[0].pageX - lightboxWrapper.offsetLeft;
+            touchStartY = e.touches[0].pageY - lightboxWrapper.offsetTop;
+            scrollLeft = lightboxWrapper.scrollLeft;
+            scrollTop = lightboxWrapper.scrollTop;
+        }, { passive: false });
+
+        lightboxWrapper.addEventListener('touchend', () => isTouchDown = false);
+        
+        lightboxWrapper.addEventListener('touchmove', (e) => {
+            if (!isTouchDown || !isZoomed) return;
+            e.preventDefault(); // Stop mobile browser from trying to scroll the page underneath
+            const x = e.touches[0].pageX - lightboxWrapper.offsetLeft;
+            const y = e.touches[0].pageY - lightboxWrapper.offsetTop;
+            const walkX = (x - touchStartX) * 1.5; 
+            const walkY = (y - touchStartY) * 1.5;
+            lightboxWrapper.scrollLeft = scrollLeft - walkX;
+            lightboxWrapper.scrollTop = scrollTop - walkY;
+        }, { passive: false });
+
+        // Double-Tap to Zoom Logic
+        lightboxImg.addEventListener('touchend', (e) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 300 && tapLength > 0) { // If two taps happen within 300ms
+                toggleZoom(e);
+                e.preventDefault();
+            }
+            lastTap = currentTime;
         });
 
         zoomToggle.addEventListener('click', (e) => {
