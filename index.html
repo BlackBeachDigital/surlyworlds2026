@@ -240,7 +240,7 @@
             background: white;
         }
 
-        select:disabled {
+        select:disabled, input[type="number"]:disabled {
             background-color: #f3f4f6;
             cursor: not-allowed;
             opacity: 0.6;
@@ -263,6 +263,12 @@
             background-color: #1e40af;
             transform: translateY(-4px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .submit-btn:disabled, .submit-btn:disabled:hover {
+            background-color: #9ca3af !important;
+            transform: none !important;
+            box-shadow: none !important;
+            cursor: not-allowed !important;
         }
 
         .blue-section > label, .red-section > label, .shorts-section > label {
@@ -656,6 +662,9 @@
             </div>
 
             <div class="flex flex-col items-center justify-center gap-4 mt-8">
+                <div id="disabled-message" class="hidden text-red-700 font-black text-center text-xl md:text-2xl cinzel w-full mb-2 bg-red-50 p-4 rounded-xl border border-red-200">
+                    Order Form Will be Enabled After Pricing is Finalized
+                </div>
                 <div class="flex items-center justify-center gap-4 w-full">
                     <img src="https://surlyworlds2026.netlify.app/images/robin.png" alt="Robin" class="w-12 md:w-[72px] h-auto drop-shadow-lg">
                     <button type="submit" id="submitBtn" class="flex-1 py-8 rounded-3xl submit-btn cinzel text-2xl md:text-4xl shadow-2xl">
@@ -690,6 +699,7 @@
         let itemPrices = {};
         let sizeGuides = {};
         let isZoomed = false;
+        let isOrderingEnabled = true; // New Feature Flag
         
         // Gallery State
         const galleries = {};
@@ -796,8 +806,19 @@
             try {
                 const response = await fetch(priceCsvUrl);
                 const data = await response.text();
-                data.split(/\r?\n/).forEach(row => {
+                const rows = data.split(/\r?\n/);
+                
+                rows.forEach((row, index) => {
                     const columns = row.split(',');
+                    
+                    // Check for Feature Flag in Row 2 (Index 1), Column E (Index 4)
+                    if (index === 1 && columns.length >= 5) {
+                        const flagValue = columns[4].trim().replace(/^"|"$/g, '').toUpperCase();
+                        if (flagValue === 'NO') {
+                            isOrderingEnabled = false;
+                        }
+                    }
+
                     if (columns.length >= 2) {
                         const keyInfo = mapKey(columns[0]);
                         
@@ -1040,7 +1061,25 @@
             // 2. Load the spreadsheet data asynchronously without blocking the UI
             await loadDataFromSpreadsheet();
             
-            // 3. Recalculate total in case prices loaded after a user typed a quantity
+            // 3. Apply disabled state if pricing is not finalized
+            if (!isOrderingEnabled) {
+                // Hide price labels and floating total
+                document.querySelectorAll('.price-label').forEach(el => el.style.display = 'none');
+                document.getElementById('floating-order-total').style.display = 'none';
+                
+                // Disable submit button and show warning message
+                const sBtn = document.getElementById('submitBtn');
+                sBtn.disabled = true;
+                document.getElementById('disabled-message').classList.remove('hidden');
+
+                // Disable all quantity inputs so they are grayed out
+                document.querySelectorAll('.qty-input').forEach(input => {
+                    input.disabled = true;
+                    input.value = ""; // Clear any default values just in case
+                });
+            }
+            
+            // 4. Recalculate total in case prices loaded after a user typed a quantity
             calculateTotal();
         });
 
