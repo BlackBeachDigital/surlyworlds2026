@@ -851,6 +851,16 @@
                 const price = itemPrices[input.name] || 0;
                 total += (qty * price);
 
+                // Dynamically create/update a hidden input to pass unit prices to the email receipt
+                let hiddenPriceInput = form.querySelector(`input[name="${input.name}_price"]`);
+                if (!hiddenPriceInput) {
+                    hiddenPriceInput = document.createElement('input');
+                    hiddenPriceInput.type = 'hidden';
+                    hiddenPriceInput.name = `${input.name}_price`;
+                    form.appendChild(hiddenPriceInput);
+                }
+                hiddenPriceInput.value = price.toFixed(2);
+
                 const mapping = kitItems.find(item => item.qty === input.name);
                 if (mapping) {
                     const sizeSelect = form.querySelector(`select[name="${mapping.size}"]`);
